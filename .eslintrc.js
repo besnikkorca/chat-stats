@@ -1,7 +1,8 @@
 const path = require('path');
-const schemaJson = require('./server/schema.json');
+const schemaJson = require('./server/src/services/graphql/generated/schema.json');
 
 module.exports = {
+  ignorePatterns: ['.eslintrc.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',

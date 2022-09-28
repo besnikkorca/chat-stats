@@ -1,0 +1,23 @@
+type Message {
+  id: ID!
+}
+
+type Link {
+  url: String!
+  title: String!
+}
+
+type MetaData {
+  mentions: [String!]!
+  emoticons: [String!]!
+  links: [Link!]!
+}
+
+type Query {
+  messages: [String!]!
+  metadata(messageId: ID!): MetaData
+}
+
+type Mutation {
+  message(message: String!): MetaData!
+}

@@ -1,0 +1,7 @@
+overwrite: true
+schema: './src/services/graphql/schema.graphql'
+documents: null
+generates:
+  ./src/services/graphql/generated/schema.json:
+    plugins:
+      - 'introspection'
