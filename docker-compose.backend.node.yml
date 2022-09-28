@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    container_name: zettablock-db
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  zettablock-backend:
+    build:
+      context: .
+      dockerfile: ./docker/Docker.server.node/Dockerfile
+    image: zettablock-node
+    env_file: .env
+    container_name: zettablock-backend
+    volumes:
+      - ./server:/code/server
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    links:
+      - db:postgres
+    expose:
+      - 8000
