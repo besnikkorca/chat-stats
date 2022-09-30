@@ -3,10 +3,10 @@
 set -e
 
 function migrate {
-    if psql -h db -U postgres -lqt | cut -d \| -f 1 | grep -qw ${POSTGRES_GM_DB}; then
+    if psql -h db -U postgres -lqt | cut -d \| -f 1 | grep -qw ${POSTGRES_DB}; then
         echo "Database exists. Not creating"
     else
-        psql -h db -U postgres -c "CREATE DATABASE ${POSTGRES_GM_DB}"
+        psql -h db -U postgres -c "CREATE DATABASE ${POSTGRES_DB}"
     fi
     yarn migrate
 }

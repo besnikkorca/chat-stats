@@ -1,3 +1,5 @@
-const { DATABASE_URL, PORT, JWT_SECRET } = process.env;
+const DEFAULT_PORT = 80;
+
+const { DATABASE_URL, PORT = DEFAULT_PORT, JWT_SECRET } = process.env;
 
 export { DATABASE_URL, PORT, JWT_SECRET };

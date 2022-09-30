@@ -1,2 +1,2 @@
 import '../config/init';
-import './server';
+import './app';

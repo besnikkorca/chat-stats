@@ -15,10 +15,10 @@ services:
     volumes:
       - ./server:/code/server
     ports:
-      - '8000:8000'
+      - '80:80'
     depends_on:
       - db
     links:
       - db:postgres
     expose:
-      - 8000
+      - 80

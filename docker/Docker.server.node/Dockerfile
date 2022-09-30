@@ -21,7 +21,7 @@ RUN yarn install
 WORKDIR /code/server
 RUN yarn install
 
-EXPOSE 8000
+EXPOSE 80
 
 ENTRYPOINT ["/bin/bash", "/scripts/entrypoint.sh"]
 
