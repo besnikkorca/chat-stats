@@ -1,5 +1,6 @@
 type Message {
   id: ID!
+  text: String!
 }
 
 type Link {
@@ -13,11 +14,45 @@ type MetaData {
   links: [Link!]!
 }
 
+type User {
+  id: ID!
+  role: String!
+  username: String!
+  email: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
 type Query {
-  messages: [String!]!
+  messages(userId: ID!): [Message!]!
   metadata(messageId: ID!): MetaData
+  metadatas: [MetaData!]!
+
+  #Auth Queries
+  user(id: ID!): User
+}
+
+input RegisterInput {
+  username: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+type RegisterResult {
+  user: User!
+  token: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {
   message(message: String!): MetaData!
+
+  # Auth Mutations
+  register(registerInput: RegisterInput!): RegisterResult!
+  login(loginInput: LoginInput!): String!
 }

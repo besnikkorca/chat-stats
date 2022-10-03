@@ -3,7 +3,15 @@
   "compilerOptions": {
     "target": "es6",
     "baseUrl": "src",
-    "module": "commonjs"
+    "module": "commonjs",
+    "paths": {
+      "config/*": ["../config/*"],
+      "services/*": ["services/*"],
+      "utils/*": ["utils/*"],
+      "controllers/*": ["app/controllers/*"],
+      "modules/*": ["app/modules/*"],
+      "routes/*": ["app/routes/*"]
+    }
   },
   "include": ["src/**/*", "config"],
   "exclude": ["node_modules", "build"]
