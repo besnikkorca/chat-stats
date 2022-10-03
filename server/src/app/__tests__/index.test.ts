@@ -1,12 +1,14 @@
 import request from 'supertest';
-import server from '../index';
+import serverPromise from '../index';
 
 describe('express server', () => {
-  afterAll(() => {
+  afterAll(async () => {
+    const server = await serverPromise;
     server.close();
   });
 
   it('calls the /test route', async () => {
+    const server = await serverPromise;
     const agent = request.agent(server);
     const response = await agent.get('/performance/test');
 
