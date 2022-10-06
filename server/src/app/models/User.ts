@@ -76,5 +76,6 @@ User.init(
 
 User.beforeCreate(async (model) => {
   const hashedPassword = await Password.encrypt(model.password);
-  model.setDataValue('password', hashedPassword);
+  // eslint-disable-next-line no-param-reassign
+  model.password = hashedPassword;
 });

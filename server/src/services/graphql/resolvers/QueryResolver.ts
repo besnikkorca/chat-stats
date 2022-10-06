@@ -10,7 +10,7 @@ const resolver: QueryResolvers = {
     if (!foundUser) throw new ApolloError('User not found', 'USER_NOT_FOUND');
 
     return {
-      ...foundUser,
+      ...foundUser.toJSON(),
       id: foundUser.id.toString(),
       createdAt: foundUser.createdAt.toString(),
       updatedAt: foundUser.updatedAt.toString(),
@@ -26,10 +26,18 @@ const resolver: QueryResolvers = {
   },
   metadata: async (_, { messageId }, { models, user }) => {
     const message = await models.Message.findByPk(messageId);
+    if (!message) throw new ApolloError('Message not found', 'MESSAGE_NOT_FOUND');
     if (user?.role !== 'admin' && user?.id !== message?.userId)
       throw new ApolloError('Unauthorized', 'UNAUTHORIZED');
 
-    return models.MessageMetaData.findOne({ where: { messageId } });
+    const messageMetaData = await models.MessageMetaData.findOne({ where: { messageId } });
+    if (!messageMetaData) throw new ApolloError('Message metadata not found', 'MESSAGE_NOT_FOUND');
+
+    return {
+      ...messageMetaData.toJSON(),
+      id: messageMetaData.id.toString(),
+      messageId: messageMetaData.messageId.toString(),
+    };
   },
   metadatas: async (_, __, { models, user }) => {
     if (!user) throw new ApolloError('Unauthorized', 'UNAUTHORIZED');
@@ -40,7 +48,13 @@ const resolver: QueryResolvers = {
 
     return models.MessageMetaData.findAll({
       where: { messageId: messageIds.map(({ id }) => id) },
-    });
+    }).then((messageMetadatas) =>
+      messageMetadatas.map((messageMetaData) => ({
+        ...messageMetaData,
+        id: messageMetaData.id.toString(),
+        messageId: messageMetaData.messageId.toString(),
+      }))
+    );
   },
 };
 

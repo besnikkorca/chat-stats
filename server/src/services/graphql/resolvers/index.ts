@@ -1,5 +1,5 @@
-import Mutation from './Mutation';
-import Query from './Query';
+import Mutation from './MutationResolver';
+import Query from './QueryResolver';
 
 const resolvers = { Query, Mutation };
 

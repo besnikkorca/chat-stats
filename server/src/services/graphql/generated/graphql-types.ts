@@ -26,6 +26,12 @@ export type LoginInput = {
   password: Scalars['String'];
 };
 
+export type LoginResult = {
+  __typename?: 'LoginResult';
+  expirationToken: Scalars['String'];
+  token: Scalars['String'];
+};
+
 export type Message = {
   __typename?: 'Message';
   id: Scalars['ID'];
@@ -34,14 +40,16 @@ export type Message = {
 
 export type MetaData = {
   __typename?: 'MetaData';
-  emoticons: Array<Scalars['String']>;
-  links: Array<Link>;
-  mentions: Array<Scalars['String']>;
+  emoticons?: Maybe<Array<Scalars['String']>>;
+  id: Scalars['ID'];
+  links?: Maybe<Array<Link>>;
+  mentions?: Maybe<Array<Scalars['String']>>;
+  messageId: Scalars['ID'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  login: Scalars['String'];
+  login: LoginResult;
   message: MetaData;
   register: RegisterResult;
 };
@@ -61,7 +69,7 @@ export type MutationRegisterArgs = {
 export type Query = {
   __typename?: 'Query';
   messages: Array<Message>;
-  metadata?: Maybe<MetaData>;
+  metadata: MetaData;
   metadatas: Array<MetaData>;
   user?: Maybe<User>;
 };
@@ -87,6 +95,7 @@ export type RegisterInput = {
 
 export type RegisterResult = {
   __typename?: 'RegisterResult';
+  expirationToken: Scalars['String'];
   token: Scalars['String'];
   user: User;
 };
@@ -189,6 +198,7 @@ export type ResolversTypes = {
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Link: ResolverTypeWrapper<Link>;
   LoginInput: LoginInput;
+  LoginResult: ResolverTypeWrapper<LoginResult>;
   Message: ResolverTypeWrapper<Message>;
   MetaData: ResolverTypeWrapper<MetaData>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -205,6 +215,7 @@ export type ResolversParentTypes = {
   ID: Scalars['ID'];
   Link: Link;
   LoginInput: LoginInput;
+  LoginResult: LoginResult;
   Message: Message;
   MetaData: MetaData;
   Mutation: {};
@@ -224,6 +235,15 @@ export type LinkResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type LoginResultResolvers<
+  ContextType = Context,
+  ParentType extends ResolversParentTypes['LoginResult'] = ResolversParentTypes['LoginResult']
+> = {
+  expirationToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MessageResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']
@@ -237,9 +257,11 @@ export type MetaDataResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['MetaData'] = ResolversParentTypes['MetaData']
 > = {
-  emoticons?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  links?: Resolver<Array<ResolversTypes['Link']>, ParentType, ContextType>;
-  mentions?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  emoticons?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  links?: Resolver<Maybe<Array<ResolversTypes['Link']>>, ParentType, ContextType>;
+  mentions?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  messageId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -248,7 +270,7 @@ export type MutationResolvers<
   ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
 > = {
   login?: Resolver<
-    ResolversTypes['String'],
+    ResolversTypes['LoginResult'],
     ParentType,
     ContextType,
     RequireFields<MutationLoginArgs, 'loginInput'>
@@ -278,7 +300,7 @@ export type QueryResolvers<
     RequireFields<QueryMessagesArgs, 'userId'>
   >;
   metadata?: Resolver<
-    Maybe<ResolversTypes['MetaData']>,
+    ResolversTypes['MetaData'],
     ParentType,
     ContextType,
     RequireFields<QueryMetadataArgs, 'messageId'>
@@ -296,6 +318,7 @@ export type RegisterResultResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['RegisterResult'] = ResolversParentTypes['RegisterResult']
 > = {
+  expirationToken?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -316,6 +339,7 @@ export type UserResolvers<
 
 export type Resolvers<ContextType = Context> = {
   Link?: LinkResolvers<ContextType>;
+  LoginResult?: LoginResultResolvers<ContextType>;
   Message?: MessageResolvers<ContextType>;
   MetaData?: MetaDataResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;

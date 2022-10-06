@@ -136,6 +136,7 @@ MessageMetaData.init(
     mentions: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: [],
+      allowNull: false,
       set(message: string) {
         const mentionsRegex = /@([a-zA-Z0-9_]+)/g;
         const mentions = message.match(mentionsRegex) || [];
@@ -145,6 +146,7 @@ MessageMetaData.init(
     emoticons: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: [],
+      allowNull: false,
       set(message: string) {
         const emoticonsRegex = /(?<=\()(.*?)(?=\))/g;
         const emoticons = message.match(emoticonsRegex) || [];
@@ -154,6 +156,7 @@ MessageMetaData.init(
     links: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       defaultValue: [],
+      allowNull: false,
       set(message: string) {
         const linksRegex = /(?<=\[)(.*?)(?=\])/g;
 

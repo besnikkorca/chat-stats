@@ -21,8 +21,8 @@ const context = async ({ req, res }: ExpressContextJWT): Promise<Context> => {
       Message,
       MessageMetaData,
     },
-    password: Password,
-    authToken: AuthToken,
+    Password,
+    AuthToken,
   };
 };
 

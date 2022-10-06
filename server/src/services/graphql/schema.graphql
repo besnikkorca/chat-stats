@@ -9,9 +9,11 @@ type Link {
 }
 
 type MetaData {
+  id: ID!
   mentions: [String!]!
   emoticons: [String!]!
   links: [Link!]!
+  messageId: ID!
 }
 
 type User {
@@ -25,7 +27,7 @@ type User {
 
 type Query {
   messages(userId: ID!): [Message!]!
-  metadata(messageId: ID!): MetaData
+  metadata(messageId: ID!): MetaData!
   metadatas: [MetaData!]!
 
   #Auth Queries
@@ -42,6 +44,12 @@ input RegisterInput {
 type RegisterResult {
   user: User!
   token: String!
+  expirationToken: String!
+}
+
+type LoginResult {
+  token: String!
+  expirationToken: String!
 }
 
 input LoginInput {
@@ -54,5 +62,5 @@ type Mutation {
 
   # Auth Mutations
   register(registerInput: RegisterInput!): RegisterResult!
-  login(loginInput: LoginInput!): String!
+  login(loginInput: LoginInput!): LoginResult!
 }

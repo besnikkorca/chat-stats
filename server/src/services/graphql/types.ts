@@ -8,6 +8,6 @@ export interface Context {
   res: Response;
   user: User | null;
   models: { User: typeof User; Message: typeof Message; MessageMetaData: typeof MessageMetaData };
-  password: typeof Password;
-  authToken: typeof AuthToken;
+  Password: typeof Password;
+  AuthToken: typeof AuthToken;
 }
