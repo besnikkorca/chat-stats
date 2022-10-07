@@ -6,9 +6,9 @@ export enum TextSize {
 }
 
 export enum TextColor {
-  white = 'white',
-  red = 'red',
-  black = 'black',
+  primary = 'primary',
+  secondary = 'secondary',
+  ternary = 'ternary',
 }
 
 export enum TextAlign {

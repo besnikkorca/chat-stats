@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof Text>;
 
 const Template: ComponentStory<typeof Text> = ({ color, ...args }) => {
-  if (color && color !== TextColor.white) {
+  if (color && color !== TextColor.primary) {
     return <Text {...args} color={color} />;
   }
 
@@ -24,26 +24,26 @@ export const ExtraLarge = Template.bind({});
 ExtraLarge.args = {
   text: 'Officia deserunt anim sint magna culpa.',
   size: TextSize.xlarge,
-  color: TextColor.black,
+  color: TextColor.secondary,
 };
 
 export const Large = Template.bind({});
 Large.args = {
   text: 'Non do deserunt deserunt nulla veniam incididunt ad fugiat in adipisicing dolore.',
   size: TextSize.large,
-  color: TextColor.white,
+  color: TextColor.primary,
 };
 
 export const Medium = Template.bind({});
 Medium.args = {
   text: 'Consectetur elit veniam nulla tempor enim exercitation occaecat commodo ea occaecat tempor.',
   size: TextSize.medium,
-  color: TextColor.white,
+  color: TextColor.primary,
 };
 
 export const Small = Template.bind({});
 Small.args = {
   text: 'Non consequat duis exercitation magna reprehenderit Lorem irure consectetur in aliqua.',
   size: TextSize.small,
-  color: TextColor.white,
+  color: TextColor.primary,
 };

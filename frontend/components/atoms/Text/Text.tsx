@@ -6,7 +6,7 @@ import styles from './Text.module.scss';
 export default function Text({
   text,
   size = TextSize.small,
-  color = TextColor.black,
+  color = TextColor.secondary,
   align = TextAlign.left,
 }: Props): JSX.Element {
   return (
@@ -20,9 +20,9 @@ export default function Text({
           [styles.xl7]: size === TextSize.xlarge,
         },
         {
-          [styles.white]: color === TextColor.white,
-          [styles.black]: color === TextColor.black,
-          [styles.red]: color === TextColor.red,
+          [styles.primary]: color === TextColor.primary,
+          [styles.secondary]: color === TextColor.secondary,
+          [styles.ternary]: color === TextColor.ternary,
         },
         {
           [styles.left]: align === TextAlign.left,

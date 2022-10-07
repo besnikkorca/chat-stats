@@ -21,16 +21,16 @@
   line-height: 6.325rem;
 }
 
-.white {
-  color: white;
+.primary {
+  color: var(--primary-color);
 }
 
-.black {
-  color: black;
+.secondary {
+  color: var(--secondary-color);
 }
 
-.red {
-  color: red;
+.ternary {
+  color: var(--ternary-color);
 }
 
 .left {
