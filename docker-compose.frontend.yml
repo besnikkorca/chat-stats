@@ -1,0 +1,16 @@
+version: '3'
+services:
+  zettablock-frontend:
+    build:
+      context: .
+      dockerfile: ./docker/Docker.frontend/Dockerfile
+    image: zettablock-frontend
+    env_file: .env
+    container_name: zettablock-frontend
+    volumes:
+      - ./frontend:/code/frontend
+      - ./server/src/services/graphql/generated:/code/server/src/services/graphql/generated
+    ports:
+      - '3000:3000'
+    expose:
+      - 3000

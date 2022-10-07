@@ -1,0 +1,16 @@
+version: '3'
+services:
+  zettablock-storybook:
+    build:
+      context: .
+      dockerfile: ./docker/Docker.frontend.storybook/Dockerfile
+    image: zettablock-storybook
+    env_file: .env
+    container_name: zettablock-storybook
+    volumes:
+      - ./frontend:/code/frontend
+      - ./server/src/services/graphql/generated:/code/server/src/services/graphql/generated
+    ports:
+      - '3002:6006'
+    expose:
+      - 6006
