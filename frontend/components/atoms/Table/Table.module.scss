@@ -1,0 +1,35 @@
+.full {
+  width: 100%;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 1.5625rem 0;
+  font-size: 1em;
+  font-family: sans-serif;
+  min-width: 25rem;
+  box-shadow: 0 0 1.125rem rgba(0, 0, 0, 0.15);
+
+  & thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  & th,
+  & td {
+    padding: 0.75rem 1rem;
+  }
+
+  & tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  & tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  & tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+}
