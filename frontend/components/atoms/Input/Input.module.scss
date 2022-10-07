@@ -1,0 +1,15 @@
+.input {
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border: 2px solid var(--bg-color-inverse);
+  color: inherit;
+  background-color: var(--bg-color);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.8;
+  }
+}

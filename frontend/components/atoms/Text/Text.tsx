@@ -14,10 +14,10 @@ export default function Text({
       className={classnames(
         styles.default,
         {
-          [styles.xl]: size === TextSize.small,
-          [styles.xl4]: size === TextSize.medium,
-          [styles.xl5]: size === TextSize.large,
-          [styles.xl7]: size === TextSize.xlarge,
+          [styles.small]: size === TextSize.small,
+          [styles.medium]: size === TextSize.medium,
+          [styles.large]: size === TextSize.large,
+          [styles.xlarge]: size === TextSize.xlarge,
         },
         {
           [styles.primary]: color === TextColor.primary,

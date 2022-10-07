@@ -5,17 +5,19 @@
   --disabled-color: rgb(156, 163, 175);
   --font-color: #424242;
   --bg-color: #fff;
+  --bg-color-inverse: #161625;
   --heading-color: #292922;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --primary-color: #fff;
-    --secondary-color: #536390;
+    --primary-color: #00ffb5;
+    --secondary-color: rgb(50, 50, 220);
     --ternary-color: #818cab;
     --disabled-color: rgb(156, 163, 175);
-    --font-color: #e1e1ff;
+    --font-color: #161625;
     --bg-color: #161625;
+    --bg-color-inverse: #fff;
     --heading-color: #818cab;
   }
 }

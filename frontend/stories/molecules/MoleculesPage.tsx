@@ -3,14 +3,10 @@ import Text from 'atoms/Text';
 import Table from 'atoms/Table';
 import Label from 'atoms/Label';
 import Input from 'atoms/Input';
+import FormInput from 'molecules/FormInput/FormInput';
 
-const entries = [
-  ['Button', <Button text="Click me" />],
-  ['Text', <Text text="Hello random text" />],
-  ['label', <Label>Username:</Label>],
-  ['Input', <Input placeholder="Enter email" value="" />],
-];
+const entries = [['Form input', <FormInput label="Password:" value="" placeholder="Password" />]];
 
-export default function AtomsPage() {
+export default function MoleculesPage() {
   return <Table width="full" indexed headers={['name', 'component']} entries={entries} />;
 }
