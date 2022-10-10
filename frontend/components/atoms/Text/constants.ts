@@ -3,6 +3,7 @@ export enum TextSize {
   large = 'large',
   medium = 'medium',
   small = 'small',
+  xsmall = 'xsmall',
 }
 
 export enum TextColor {

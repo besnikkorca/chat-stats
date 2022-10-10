@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--primary-color);
+
+  @media (prefers-color-scheme: dark) {
+    & {
+      border-color: var(--secondary-color);
+    }
+  }
+}
+
+.cta {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leftNav {
+  display: flex;
+  align-items: center;
+}
+
+.navigation {
+  list-style: none;
+  display: flex;
+  & li {
+    margin-left: 2rem;
+    cursor: pointer;
+    &:hover {
+      scale: (1.05);
+    }
+  }
+}
+
+.userArea,
+.logo {
+  margin: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}

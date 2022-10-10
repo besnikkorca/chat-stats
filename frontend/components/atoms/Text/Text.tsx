@@ -14,6 +14,7 @@ export default function Text({
       className={classnames(
         styles.default,
         {
+          [styles.xsmall]: size === TextSize.xsmall,
           [styles.small]: size === TextSize.small,
           [styles.medium]: size === TextSize.medium,
           [styles.large]: size === TextSize.large,

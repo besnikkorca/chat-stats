@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react';
-import { GenericVoidFunc, Value } from 'types/global';
+import type { GenericVoidFunc, Value } from 'types/global';
 
 export type Props = {
   label: string;

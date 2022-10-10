@@ -1,9 +1,7 @@
-import Button from 'atoms/Button';
-import Input from 'atoms/Input';
-import Card from 'molecules/Card';
+import Footer from 'molecules/Footer';
+import Header from 'molecules/Header/Header';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.scss';
 
 const Home: NextPage = () => {
@@ -14,20 +12,22 @@ const Home: NextPage = () => {
         <meta name="description" content="ZettaBlock login" />
       </Head>
 
+      <Header />
       <main className={styles.main}>
-        <Card />
+        <h1>Home</h1>
       </main>
 
-      <footer className={styles.footer}>
-        <a href="https://zettablock.com" target="_blank" rel="noopener noreferrer">
-          Powered by &nbsp;
-          <span className={styles.logo}>
-            <Image src="/zettablock.jpg" alt="ZettaBlock Logo" width={60} height={60} />
-          </span>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  return {
+    props: {
+      requiresAuth: true,
+    },
+  };
+}
 
 export default Home;
