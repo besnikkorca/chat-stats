@@ -1,6 +1,6 @@
 overwrite: true
 schema: './src/services/graphql/schema.graphql'
-documents: null
+documents: '../frontend/components/services/graphql/queries.ts'
 generates:
   ./src/services/graphql/generated/graphql-types.ts:
     plugins:
@@ -11,3 +11,11 @@ generates:
   ./src/services/graphql/generated/schema.json:
     plugins:
       - 'introspection'
+  # this one should be done from the fe folder but it's okay to leave it here for now
+  ../frontend/components/services/graphql/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      withHooks: true

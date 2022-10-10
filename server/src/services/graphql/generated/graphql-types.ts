@@ -40,10 +40,10 @@ export type Message = {
 
 export type MetaData = {
   __typename?: 'MetaData';
-  emoticons?: Maybe<Array<Scalars['String']>>;
+  emoticons: Array<Scalars['String']>;
   id: Scalars['ID'];
-  links?: Maybe<Array<Link>>;
-  mentions?: Maybe<Array<Scalars['String']>>;
+  links: Array<Link>;
+  mentions: Array<Scalars['String']>;
   messageId: Scalars['ID'];
 };
 
@@ -68,6 +68,7 @@ export type MutationRegisterArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  me?: Maybe<User>;
   messages: Array<Message>;
   metadata: MetaData;
   metadatas: Array<MetaData>;
@@ -257,10 +258,10 @@ export type MetaDataResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['MetaData'] = ResolversParentTypes['MetaData']
 > = {
-  emoticons?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  emoticons?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  links?: Resolver<Maybe<Array<ResolversTypes['Link']>>, ParentType, ContextType>;
-  mentions?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  links?: Resolver<Array<ResolversTypes['Link']>, ParentType, ContextType>;
+  mentions?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   messageId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -293,6 +294,7 @@ export type QueryResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   messages?: Resolver<
     Array<ResolversTypes['Message']>,
     ParentType,

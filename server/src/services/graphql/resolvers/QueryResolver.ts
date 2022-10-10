@@ -2,6 +2,15 @@ import { ApolloError } from 'apollo-server-express';
 import { QueryResolvers } from '../generated/graphql-types';
 
 const resolver: QueryResolvers = {
+  me: async (_, __, { user }) => {
+    if (!user) throw new ApolloError('Not authenticated');
+    return {
+      ...user.toJSON(),
+      id: user.id.toString(),
+      createdAt: user.createdAt.toString(),
+      updatedAt: user.updatedAt.toString(),
+    };
+  },
   user: async (_, { id }, { models, user }) => {
     if (user?.role !== 'admin') throw new ApolloError('Unauthorized', 'UNAUTHORIZED');
 
