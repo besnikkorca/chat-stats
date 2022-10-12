@@ -1,0 +1,5 @@
+const ONE_SECOND = 1000 * 60;
+
+const ONE_MINUTE = ONE_SECOND * 60;
+
+export { ONE_SECOND, ONE_MINUTE };

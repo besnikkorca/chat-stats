@@ -5,10 +5,10 @@ import Label from 'atoms/Label';
 import Input from 'atoms/Input';
 
 const entries = [
-  ['Button', <Button text="Click me" />],
-  ['Text', <Text text="Hello random text" />],
-  ['label', <Label>Username:</Label>],
-  ['Input', <Input placeholder="Enter email" value="" />],
+  { name: 'Button', component: <Button text="Click me" /> },
+  { name: 'Text', component: <Text text="Hello random text" /> },
+  { name: 'label', component: <Label>Username:</Label> },
+  { name: 'Input', component: <Input placeholder="Enter email" value="" /> },
 ];
 
 export default function AtomsPage() {

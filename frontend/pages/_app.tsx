@@ -6,6 +6,7 @@ import ApolloProvider from 'services/graphql/ApolloProvider';
 import UserProvider from 'contexts/User/UserProvider';
 import type { AppProps } from 'types/global';
 import SessionManager from 'services/Session/SessionManager';
+import QueryClientProvider from 'services/query/QueryClientProvider';
 
 function MyApp({ Component, pageProps: { requiresAuth = false, ...pageProps } }: AppProps) {
   return (
@@ -15,15 +16,17 @@ function MyApp({ Component, pageProps: { requiresAuth = false, ...pageProps } }:
         <meta name="description" content="ZettaBlock is a one-stop blockchain data platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ApolloProvider>
-        <UserProvider>
-          <SessionManager>
-            <RouteGuard requiresAuth={requiresAuth}>
-              <Component {...pageProps} />
-            </RouteGuard>
-          </SessionManager>
-        </UserProvider>
-      </ApolloProvider>
+      <QueryClientProvider>
+        <ApolloProvider>
+          <UserProvider>
+            <SessionManager>
+              <RouteGuard requiresAuth={requiresAuth}>
+                <Component {...pageProps} />
+              </RouteGuard>
+            </SessionManager>
+          </UserProvider>
+        </ApolloProvider>
+      </QueryClientProvider>
     </>
   );
 }
