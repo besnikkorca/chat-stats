@@ -1,6 +1,7 @@
 import Table from 'atoms/Table';
 import Footer from 'molecules/Footer';
 import Header from 'molecules/Header/Header';
+import Tabs from 'molecules/Tabs/Tabs';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import useDeleteAPIEntry from 'services/query/helpers/useDeleteAPIEntry';
@@ -33,24 +34,46 @@ const Home: NextPage = () => {
 
       <Header />
       <main className={styles.main}>
-        <div>
-          <Table<APIEntry>
-            onDelete={deleteAPIEntry.mutate}
-            isLoadingDelete={deleteAPIEntry.isLoading}
-            active={active}
-            setActive={setActive}
-            indexed={false}
-            headers={headers as (keyof APIEntry)[]}
-            editable={['description']}
-            onEdit={handleEdit}
-            entries={parsedEntries}
-            sortable
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            search={search}
-            setSearch={setSearch}
-          />
-        </div>
+        <Tabs
+          panes={[
+            {
+              name: 'API',
+              content: (
+                <Table<APIEntry>
+                  width="full"
+                  idKey="id"
+                  onDelete={deleteAPIEntry.mutate}
+                  isLoadingDelete={deleteAPIEntry.isLoading}
+                  active={active}
+                  setActive={setActive}
+                  indexed={false}
+                  headers={headers as (keyof APIEntry)[]}
+                  editable={['description']}
+                  onEdit={handleEdit}
+                  entries={parsedEntries}
+                  sortable
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  search={search}
+                  setSearch={setSearch}
+                />
+              ),
+            },
+            {
+              name: 'Devs',
+              content: (
+                <div>
+                  <Table
+                    width="full"
+                    idKey="name"
+                    headers={['name', 'surname']}
+                    entries={[{ name: 'Besnik', surname: 'Korca' }]}
+                  />
+                </div>
+              ),
+            },
+          ]}
+        ></Tabs>
       </main>
 
       <Footer />

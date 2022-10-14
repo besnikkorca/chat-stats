@@ -12,5 +12,7 @@ const entries = [
 ];
 
 export default function AtomsPage() {
-  return <Table width="full" indexed headers={['name', 'component']} entries={entries} />;
+  return (
+    <Table idKey="name" width="full" indexed headers={['name', 'component']} entries={entries} />
+  );
 }

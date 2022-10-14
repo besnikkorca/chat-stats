@@ -1,15 +1,11 @@
 import { Props } from './types';
 import styles from './Table.module.scss';
 import classNames from 'classnames';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import Input from 'atoms/Input';
-import Button from 'atoms/Button';
-import { ButtonSize } from 'atoms/Button/constants';
-import { BsFillTrashFill } from 'react-icons/bs';
 import Icon from 'atoms/Icon';
 import { IconName } from 'atoms/Icon/constants';
-import Spinner from 'atoms/Spinner';
-import CommandPattern from 'utils/CommandPattern';
+import CTAArea from './CTAArea';
 
 function readableText(str: string | ReactNode, isActive: boolean) {
   if (isActive || typeof str !== 'string') return str;
@@ -17,7 +13,8 @@ function readableText(str: string | ReactNode, isActive: boolean) {
   return str.length > 100 ? `${str.slice(0, 100)}...` : str;
 }
 
-export default function Table<T extends { id: string }>({
+export default function Table<T>({
+  idKey = 'id' as keyof T,
   indexed = true,
   sortable = false,
   sortBy = null,
@@ -33,20 +30,7 @@ export default function Table<T extends { id: string }>({
 }: Props<T>) {
   return (
     <div>
-      <div className={styles.ctaArea}>
-        <Icon
-          disabled={CommandPattern.undoSize() === 0}
-          onClick={CommandPattern.undo}
-          name={IconName.caretLeft}
-        />
-        <Icon
-          disabled={CommandPattern.redoSize() === 0}
-          onClick={CommandPattern.redo}
-          name={IconName.caretRight}
-        />
-        &nbsp;
-        <Input placeholder="search..." value={search} onChange={setSearch} />
-      </div>
+      {setSearch && <CTAArea search={search} setSearch={setSearch} />}
       <table className={classNames(styles.table, { [styles.full]: width === 'full' })}>
         <thead>
           <tr>
@@ -68,14 +52,14 @@ export default function Table<T extends { id: string }>({
         <tbody>
           {entries.map((entry, idx) => (
             <tr
-              key={entry.id.toString()}
-              onClick={() => 'setActive' in rest && rest.setActive(entry.id.toString())}
+              key={entry[idKey].toString()}
+              onClick={() => 'setActive' in rest && rest.setActive(entry[idKey].toString())}
             >
               {indexed && <td>{idx + 1}</td>}
               {headers.map((header) => (
                 <td key={header.toString()}>
                   {'editable' in rest &&
-                  rest.active?.id === entry.id &&
+                  rest.active?.[idKey] === entry[idKey] &&
                   rest.editable.includes(header) ? (
                     <Input
                       autoFocus
@@ -87,7 +71,10 @@ export default function Table<T extends { id: string }>({
                       onChange={rest.onEdit(header)}
                     />
                   ) : (
-                    readableText(entry[header], 'active' in rest && rest.active?.id === entry.id)
+                    readableText(
+                      entry[header],
+                      'active' in rest && rest.active?.[idKey] === entry[idKey]
+                    )
                   )}
                 </td>
               ))}

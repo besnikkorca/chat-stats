@@ -9,5 +9,7 @@ const entries = [
 ];
 
 export default function MoleculesPage() {
-  return <Table width="full" indexed headers={['name', 'component']} entries={entries} />;
+  return (
+    <Table idKey="name" width="full" indexed headers={['name', 'component']} entries={entries} />
+  );
 }
