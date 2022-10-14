@@ -12,10 +12,21 @@
   }
 }
 
+.caretLeft,
+.caretRight {
+  color: lightgray;
+  cursor: pointer;
+  &:hover {
+    color: #009879;
+    scale: 1.2;
+  }
+}
+
 .isLoading {
   cursor: not-allowed;
-  color: lightgray;
+  color: rgb(211 211 211 / 0.5);
   &:hover {
-    color: lightgray;
+    color: rgb(211 211 211 / 0.5);
+    scale: 1;
   }
 }

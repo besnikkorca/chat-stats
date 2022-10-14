@@ -9,6 +9,7 @@ import { BsFillTrashFill } from 'react-icons/bs';
 import Icon from 'atoms/Icon';
 import { IconName } from 'atoms/Icon/constants';
 import Spinner from 'atoms/Spinner';
+import CommandPattern from 'utils/CommandPattern';
 
 function readableText(str: string | ReactNode, isActive: boolean) {
   if (isActive || typeof str !== 'string') return str;
@@ -32,7 +33,20 @@ export default function Table<T extends { id: string }>({
 }: Props<T>) {
   return (
     <div>
-      <Input placeholder="search..." value={search} onChange={setSearch} />
+      <div className={styles.ctaArea}>
+        <Icon
+          disabled={CommandPattern.undoSize() === 0}
+          onClick={CommandPattern.undo}
+          name={IconName.caretLeft}
+        />
+        <Icon
+          disabled={CommandPattern.redoSize() === 0}
+          onClick={CommandPattern.redo}
+          name={IconName.caretRight}
+        />
+        &nbsp;
+        <Input placeholder="search..." value={search} onChange={setSearch} />
+      </div>
       <table className={classNames(styles.table, { [styles.full]: width === 'full' })}>
         <thead>
           <tr>

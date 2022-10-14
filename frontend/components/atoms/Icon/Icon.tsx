@@ -1,6 +1,7 @@
 import { IconName } from './constants';
 import { Props } from './types';
 import { BsFillTrashFill } from 'react-icons/bs';
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import styles from './Icon.module.scss';
 import classNames from 'classnames';
 
@@ -9,10 +10,14 @@ function getIconComp(name: IconName) {
     default:
     case IconName.bin:
       return BsFillTrashFill;
+    case IconName.caretLeft:
+      return AiFillCaretLeft;
+    case IconName.caretRight:
+      return AiFillCaretRight;
   }
 }
 
-export default function Icon({ isLoading, onClick, name }: Props) {
+export default function Icon({ disabled, isLoading, onClick, name }: Props) {
   const IconComp = getIconComp(name);
   return (
     <IconComp
@@ -22,8 +27,10 @@ export default function Icon({ isLoading, onClick, name }: Props) {
         onClick?.();
       }}
       className={classNames(styles.icon, {
-        [styles.isLoading]: isLoading,
+        [styles.isLoading]: disabled || isLoading,
         [styles.bin]: name === IconName.bin,
+        [styles.caretLeft]: name === IconName.caretLeft,
+        [styles.caretRight]: name === IconName.caretRight,
       })}
     />
   );
