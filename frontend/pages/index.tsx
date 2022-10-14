@@ -8,7 +8,17 @@ import { APIEntry } from 'types/api';
 import styles from '../styles/Home.module.scss';
 
 const Home: NextPage = () => {
-  const { headers, parsedEntries, handleEdit, active, setActive } = useParsedEntries();
+  const {
+    headers,
+    parsedEntries,
+    handleEdit,
+    active,
+    setActive,
+    sortBy,
+    setSortBy,
+    search,
+    setSearch,
+  } = useParsedEntries();
 
   return (
     <div className={styles.container}>
@@ -28,6 +38,11 @@ const Home: NextPage = () => {
             editable={['description']}
             onEdit={handleEdit}
             entries={parsedEntries}
+            sortable
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            search={search}
+            setSearch={setSearch}
           />
         </div>
       </main>

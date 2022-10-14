@@ -1,14 +1,16 @@
-import { useEffect } from 'react';
-import { GenericVoidFunc } from 'types/global';
+import { useState, useEffect } from 'react';
 
-export default function useDebounce(cb: GenericVoidFunc, delay: number) {
+export default function useDebounce<T>(value: T, delay: number) {
+  const [val, setVal] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => {
-      cb();
+      setVal(value);
     }, delay);
 
     return () => {
       if (handler) clearTimeout(handler);
     };
-  }, [cb, delay]);
+  }, [value, delay]);
+
+  return val;
 }

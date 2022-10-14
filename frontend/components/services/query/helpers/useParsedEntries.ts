@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import useAPIsDataPaginated from 'services/query/helpers/useAPIsDataPaginated';
 import useScrollToBottomAction from 'services/query/helpers/useScrollToBottomAction';
 import { APIEntry } from 'types/api';
@@ -6,7 +6,10 @@ import useDebounce from 'utils/useDebounce';
 import useEditAPIData from './useEditAPIData';
 
 export default function useParsedEntries() {
-  const { data, fetchNextPage } = useAPIsDataPaginated();
+  const [sortBy, setSortBy] = useState<keyof APIEntry | null>(null);
+  const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 500);
+  const { data, fetchNextPage } = useAPIsDataPaginated(debouncedSearch, sortBy);
   const entries = data?.pages.reduce((acc, page) => [...acc, ...page], []) || [];
   useScrollToBottomAction(document, fetchNextPage, 100);
 
@@ -46,5 +49,16 @@ export default function useParsedEntries() {
     setActive(entry);
   };
 
-  return { active, setActive: handleSetActive, headers, entries, parsedEntries, handleEdit };
+  return {
+    active,
+    setActive: handleSetActive,
+    headers,
+    entries,
+    parsedEntries,
+    handleEdit,
+    sortBy,
+    setSortBy,
+    search,
+    setSearch,
+  };
 }

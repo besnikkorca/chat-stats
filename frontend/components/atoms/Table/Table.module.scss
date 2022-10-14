@@ -14,6 +14,16 @@
     background-color: #009879;
     color: #ffffff;
     text-align: left;
+
+    & .header {
+      display: flex;
+      cursor: pointer;
+      &:hover .sortAsc,
+      &:hover .sortDesc {
+        scale: (1.2);
+        transform: translateY(2px);
+      }
+    }
   }
 
   & th,
@@ -36,4 +46,27 @@
   & tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
   }
+}
+
+.sortAsc,
+.sortDesc {
+  transition: all ease-in-out 0.2s;
+  left: 3px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 4px 4px 0 3px;
+  background: transparent;
+}
+
+.sortAsc {
+  border: solid 5px transparent;
+  border-bottom: solid 7px #f80;
+  border-top-width: 0;
+}
+
+.sortDesc {
+  border: solid 5px transparent;
+  border-top: solid 7px #f80;
+  border-bottom-width: 0;
 }

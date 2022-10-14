@@ -5,6 +5,11 @@ type SharedProps<T> = {
   indexed?: boolean;
   headers: (keyof T)[];
   entries: { [K in keyof T]: string | JSX.Element }[];
+  sortable?: boolean;
+  sortBy?: keyof T | null;
+  setSortBy?: GenericVoidFunc;
+  search?: string;
+  setSearch?: GenericVoidFunc;
 };
 
 type EditableProps<T> = SharedProps<T> & {
