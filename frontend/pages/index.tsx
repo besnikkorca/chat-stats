@@ -3,6 +3,7 @@ import Footer from 'molecules/Footer';
 import Header from 'molecules/Header/Header';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import useDeleteAPIEntry from 'services/query/helpers/useDeleteAPIEntry';
 import useParsedEntries from 'services/query/helpers/useParsedEntries';
 import { APIEntry } from 'types/api';
 import styles from '../styles/Home.module.scss';
@@ -20,6 +21,8 @@ const Home: NextPage = () => {
     setSearch,
   } = useParsedEntries();
 
+  const deleteAPIEntry = useDeleteAPIEntry();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,6 +34,8 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div>
           <Table<APIEntry>
+            onDelete={deleteAPIEntry.mutate}
+            isLoadingDelete={deleteAPIEntry.isLoading}
             active={active}
             setActive={setActive}
             indexed={false}

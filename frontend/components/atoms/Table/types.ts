@@ -10,6 +10,8 @@ type SharedProps<T> = {
   setSortBy?: GenericVoidFunc;
   search?: string;
   setSearch?: GenericVoidFunc;
+  onDelete?: GenericVoidFunc;
+  isLoadingDelete?: boolean;
 };
 
 type EditableProps<T> = SharedProps<T> & {

@@ -3,6 +3,12 @@ import styles from './Table.module.scss';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
 import Input from 'atoms/Input';
+import Button from 'atoms/Button';
+import { ButtonSize } from 'atoms/Button/constants';
+import { BsFillTrashFill } from 'react-icons/bs';
+import Icon from 'atoms/Icon';
+import { IconName } from 'atoms/Icon/constants';
+import Spinner from 'atoms/Spinner';
 
 function readableText(str: string | ReactNode, isActive: boolean) {
   if (isActive || typeof str !== 'string') return str;
@@ -20,6 +26,8 @@ export default function Table<T extends { id: string }>({
   entries,
   search,
   setSearch,
+  onDelete,
+  isLoadingDelete,
   ...rest
 }: Props<T>) {
   return (
@@ -40,6 +48,7 @@ export default function Table<T extends { id: string }>({
                 </div>
               </th>
             ))}
+            {onDelete && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -68,6 +77,15 @@ export default function Table<T extends { id: string }>({
                   )}
                 </td>
               ))}
+              {onDelete && (
+                <td>
+                  <Icon
+                    isLoading={isLoadingDelete}
+                    onClick={() => onDelete(entry)}
+                    name={IconName.bin}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
